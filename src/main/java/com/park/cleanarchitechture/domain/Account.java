@@ -40,6 +40,7 @@ public class Account {
                 this.activityWindow.calculateBalance(this.id));
     }
 
+    // "출금 계좌는 초과 인출되어서는 안 된다"라는 규칙처럼 비즈니스 규칙을 도메인 엔티티 안에 넣는다!
     public boolean withdraw(Money money, AccountId targetAccountId) {
 
         if (!mayWithdraw(money)) {
@@ -56,6 +57,7 @@ public class Account {
         return true;
     }
 
+    // 그리고 isPositiveOrZero()는 Money 클래스 안에 넣는다! 검증 로직 책임은 Money에게 있는 것.
     private boolean mayWithdraw(Money money) {
         return Money.add(
                         this.calculateBalance(),
